@@ -29,8 +29,12 @@ The main purpose (and test case) to build it was to allow streaming from [**OBS 
 * For the simplest case, just run a container with this image:
 
 ```bash
-docker run -d -p 1935:1935 --name nginx-rtmp tiangolo/nginx-rtmp
+docker run -d -p 80:80 -p 1935:1935 --name nginx-rtmp nginx-rtmp
 ```
+
+* Open OBS and stream to `rtmp://DOCKER_HOST:1935/live` with `{STREAM_KEY}`
+
+* Open the browser and navigate to `http://DOCKER_HOST/?key={STREAM_KEY}`
 
 ## How to test with OBS Studio and VLC
 
