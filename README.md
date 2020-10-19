@@ -29,14 +29,10 @@ The main purpose (and test case) to build it was to allow streaming from [**OBS 
 * For the simplest case, just run a container with this image:
 
 ```bash
-docker run -d -p 80:80 -p 1935:1935 --name nginx-rtmp nginx-rtmp
+docker run -d -p 80:80 -p 1935:1935 --name nginx-rtmp pccr10001/nginx-rtmp
 ```
 
-* Open OBS and stream to `rtmp://DOCKER_HOST:1935/live` with `{STREAM_KEY}`
-
-* Open the browser and navigate to `http://DOCKER_HOST/?key={STREAM_KEY}`
-
-## How to test with OBS Studio and VLC
+## How to test with OBS Studio and players
 
 * Run a container with the command above
 
@@ -51,6 +47,7 @@ docker run -d -p 80:80 -p 1935:1935 --name nginx-rtmp nginx-rtmp
 * In the section "Sources" click de "Add" button (`+`) and select a source (for example "Screen Capture") and configure it as you need
 * Click the "Start Streaming" button
 
+### VLC
 
 * Open a [VLC](http://www.videolan.org/vlc/index.html) player (it also works in Raspberry Pi using `omxplayer`)
 * Click in the "Media" menu
@@ -58,6 +55,11 @@ docker run -d -p 80:80 -p 1935:1935 --name nginx-rtmp nginx-rtmp
 * Enter the URL from above as `rtmp://<ip_of_host>/live/<key>` replacing `<ip_of_host>` with the IP of the host in which the container is running and `<key>` with the key you created in OBS Studio. For example: `rtmp://192.168.0.30/live/test`
 * Click "Play"
 * Now VLC should start playing whatever you are transmitting from OBS Studio
+
+### Video.JS
+
+* Open a browser and navigate to `http://<ip_of_host>/key?=<key>`. For example: `http://192.168.0.30/?key=test`
+* Click play icon
 
 ## Debugging
 
