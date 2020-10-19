@@ -1,0 +1,46 @@
+<html><head>
+  <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+  <style>
+  .video_container .video-js {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 110;
+}
+  </style>
+</head>
+
+<body>
+  <div class="video_container">
+  <video
+    id="my-video"
+    class="video-js"
+    controls
+    data-setup="{}"
+  >
+    <source src="/live/asdfasdf.m3u8" type="application/x-mpegURL" />
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="https://videojs.com/html5-video-support/" target="_blank"
+        >supports HTML5 video</a
+      >
+    </p>
+  </video>
+  </div>
+
+<script>
+    var url = new URL(window.location);
+    var usp = new URLSearchParams(url.search);
+    var v = videojs("my-video");
+    video.src({
+        type: 'application/x-mpegURL',
+        src: '/live/' + usp.get("key") + '.m3u8'
+    });
+</script>
+
+</body>
+</html>

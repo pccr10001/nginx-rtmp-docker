@@ -47,10 +47,13 @@ RUN cd /tmp/build/nginx/${NGINX_VERSION} && \
 
 # Forward logs to Docker
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stderr /var/log/nginx/error.log
+    ln -sf /dev/stderr /var/log/nginx/error.log && \
+    mkdir -p /var/www/html
+
+ADD index.html /var/www/html/
 
 # Set up config file
 COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 1935
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80 1935
+CMD ["sh", "-c", "mkdir -p /tmp/hls/live; nginx -g 'daemon off;'"]
